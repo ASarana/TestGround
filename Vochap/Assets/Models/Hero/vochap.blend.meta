@@ -1,0 +1,106 @@
+fileFormatVersion: 2
+guid: 54e8dd6788dfee14dbd483c34383b9b7
+timeCreated: 1452004451
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: mrskull
+    100002: shortrifle
+    100004: shortrifle_001
+    100006: //RootNode
+    100008: "\u041F\u043B\u043E\u0441\u043A\u043E\u0441\u0442\u044C"
+    100010: machete
+    100012: shortriflebutt
+    400000: mrskull
+    400002: shortrifle
+    400004: shortrifle_001
+    400006: //RootNode
+    400008: "\u041F\u043B\u043E\u0441\u043A\u043E\u0441\u0442\u044C"
+    400010: machete
+    400012: shortriflebutt
+    2300000: mrskull
+    2300002: shortrifle
+    2300004: shortrifle_001
+    2300006: "\u041F\u043B\u043E\u0441\u043A\u043E\u0441\u0442\u044C"
+    2300008: machete
+    2300010: shortriflebutt
+    2300012: //RootNode
+    3300000: mrskull
+    3300002: shortrifle
+    3300004: shortrifle_001
+    3300006: "\u041F\u043B\u043E\u0441\u043A\u043E\u0441\u0442\u044C"
+    3300008: machete
+    3300010: shortriflebutt
+    3300012: //RootNode
+    4300000: "\u041F\u043B\u043E\u0441\u043A\u043E\u0441\u0442\u044C"
+    4300002: shortrifle
+    4300004: shortrifle_001
+    4300006: mrskull
+    4300008: vochap
+    4300010: machete
+    4300012: shortriflebutt
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
