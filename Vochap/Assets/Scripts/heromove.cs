@@ -28,15 +28,13 @@ public class heromove : MonoBehaviour
 
         h = CrossPlatformInputManager.GetAxis("Horizontal");
         v = CrossPlatformInputManager.GetAxis("Vertical");
-       
+
         camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
         //рассчитаем вектор движения 
         move = (v * camForward + h * cam.right).normalized;
-        Y = h * 90 - v * 90;
         hero.Move(speed * move); //двигаем 
         hero.Move(-Vector3.up); // прижимаем к земле
-      //  hero.transform.LookAt(move*500);
-         this.transform.rotation = Quaternion.Euler(new Vector3(0,Y,0)); //поворачиваем по направлению
-
+        if (move != new Vector3(0, 0, 0))
+            transform.forward = move;
     }
 }
