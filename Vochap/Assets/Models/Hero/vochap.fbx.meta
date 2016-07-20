@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: e729fe38095423143ba4e30d7cbc3943
-timeCreated: 1468960896
+labels:
+- Character
+timeCreated: 1469042879
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -154,7 +156,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human:
@@ -265,11 +267,11 @@ ModelImporter:
     - boneName: upper_arm.L
       humanName: LeftUpperArm
       limit:
-        min: {x: 0, y: 0, z: 0}
+        min: {x: 0, y: 0, z: -45.826767}
         max: {x: 0, y: 0, z: 0}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 0
+        modified: 1
     - boneName: upper_arm.R
       humanName: RightUpperArm
       limit:
@@ -297,11 +299,11 @@ ModelImporter:
     - boneName: hand.L
       humanName: LeftHand
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
+        min: {x: 0, y: -153.38583, z: 0}
+        max: {x: 0, y: 26.614166, z: 0}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 0
+        modified: 1
     - boneName: hand.R
       humanName: RightHand
       limit:
@@ -432,6 +434,21 @@ ModelImporter:
       rotation: {x: 0.0095376205, y: 4.3133943e-14, z: -0.0000000022738815, w: 0.9999545}
       scale: {x: 1, y: 1.0000001, z: 0.9999999}
       transformModified: 1
+    - name: machete
+      position: {x: 0.0037487997, y: -0.002511054, z: -0.0012416746}
+      rotation: {x: 0.532036, y: 0.5320356, z: 0.46576604, w: -0.4657659}
+      scale: {x: 0.19275138, y: 0.19275135, z: 0.19275142}
+      transformModified: 1
+    - name: shortrifle
+      position: {x: 0.0017209441, y: 0.0031907237, z: -0.0034199336}
+      rotation: {x: 0.6362482, y: -0.19473852, z: -0.1704823, w: 0.72677445}
+      scale: {x: 0.16843686, y: 0.16843684, z: 0.16843688}
+      transformModified: 1
+    - name: shortriflebutt
+      position: {x: -0, y: -0.0030000042, z: 0.015046777}
+      rotation: {x: 0.00066842424, y: 0.00000007450585, z: -0.00000004114167, w: 0.9999998}
+      scale: {x: 0.9999998, y: 1.0000002, z: 0.9999998}
+      transformModified: 1
     - name: neck
       position: {x: -1.3322676e-16, y: 0.0026945018, z: -1.1175906e-10}
       rotation: {x: 0.0927254, y: -2.6142647e-14, z: -0.00000002210753, w: 0.9956918}
@@ -444,7 +461,7 @@ ModelImporter:
       transformModified: 1
     - name: shoulder.L
       position: {x: -0.00018299984, y: 0.0027801427, z: 0.00089709024}
-      rotation: {x: -0.17880014, y: -0.03812047, z: 0.6328795, w: 0.7523568}
+      rotation: {x: -0.17880015, y: -0.038120475, z: 0.63287956, w: 0.7523569}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: upper_arm.L
@@ -472,16 +489,6 @@ ModelImporter:
       rotation: {x: 0.15090604, y: 0.28424752, z: 0.20580637, w: 0.9241615}
       scale: {x: 0.99999994, y: 0.99999976, z: 0.9999998}
       transformModified: 1
-    - name: thumb.01.L
-      position: {x: 0.00068555406, y: 0.0012375652, z: 0.0011306311}
-      rotation: {x: 0.04527216, y: -0.34882838, z: -0.04596849, w: 0.93496317}
-      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999999}
-      transformModified: 1
-    - name: thumb.02.L
-      position: {x: -1.14960125e-10, y: 0.0006100316, z: -1.618173e-10}
-      rotation: {x: 0.12559132, y: -0.3274449, z: 0.18886459, w: 0.9172442}
-      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000001}
-      transformModified: 1
     - name: palm.02.L
       position: {x: -0.00011000434, y: 0.0021864814, z: -0.00023114053}
       rotation: {x: 0.23846221, y: 0.39512086, z: 0.082283445, w: 0.8833146}
@@ -502,6 +509,16 @@ ModelImporter:
       rotation: {x: 0.19811772, y: 0.3145159, z: 0.21964289, w: 0.9019901}
       scale: {x: 1, y: 1.0000002, z: 0.99999976}
       transformModified: 1
+    - name: thumb.01.L
+      position: {x: 0.00068555406, y: 0.0012375652, z: 0.0011306311}
+      rotation: {x: 0.04527216, y: -0.34882838, z: -0.04596849, w: 0.93496317}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999999}
+      transformModified: 1
+    - name: thumb.02.L
+      position: {x: -1.14960125e-10, y: 0.0006100316, z: -1.618173e-10}
+      rotation: {x: 0.12559132, y: -0.3274449, z: 0.18886459, w: 0.9172442}
+      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000001}
+      transformModified: 1
     - name: shoulder.R
       position: {x: 0.0001829972, y: 0.0027801427, z: 0.00089709024}
       rotation: {x: -0.17880031, y: 0.03812071, z: -0.6328793, w: 0.752357}
@@ -514,7 +531,7 @@ ModelImporter:
       transformModified: 1
     - name: forearm.R
       position: {x: 1.6763806e-10, y: 0.003278297, z: -3.352761e-10}
-      rotation: {x: 0.03182565, y: 0.121069126, z: 0.018659264, w: 0.99195826}
+      rotation: {x: 0.031825654, y: 0.12106913, z: 0.018659266, w: 0.9919583}
       scale: {x: 1, y: 0.99999976, z: 1.0000001}
       transformModified: 1
     - name: hand.R
@@ -531,16 +548,6 @@ ModelImporter:
       position: {x: 1.4901161e-10, y: 0.00049207546, z: -2.7939676e-10}
       rotation: {x: 0.15090585, y: -0.28424627, z: -0.20580707, w: 0.9241618}
       scale: {x: 0.99999994, y: 1, z: 0.99999994}
-      transformModified: 1
-    - name: thumb.01.R
-      position: {x: -0.0006855592, y: 0.0012375674, z: 0.0011306314}
-      rotation: {x: 0.045272727, y: 0.34882772, z: 0.045969594, w: 0.9349633}
-      scale: {x: 1, y: 1, z: 0.99999994}
-      transformModified: 1
-    - name: thumb.02.R
-      position: {x: 8.090865e-11, y: 0.0006100311, z: 5.2386893e-11}
-      rotation: {x: 0.12559077, y: 0.3274424, z: -0.18886495, w: 0.91724503}
-      scale: {x: 1.0000001, y: 1.0000006, z: 1.0000002}
       transformModified: 1
     - name: palm.02.R
       position: {x: 0.000110002635, y: 0.0021864818, z: -0.00023114019}
@@ -561,6 +568,16 @@ ModelImporter:
       position: {x: 3.1664968e-10, y: 0.00051848294, z: -3.1664968e-10}
       rotation: {x: 0.19811772, y: -0.31451538, z: -0.21964315, w: 0.90199023}
       scale: {x: 0.99999976, y: 1.0000001, z: 0.9999998}
+      transformModified: 1
+    - name: thumb.01.R
+      position: {x: -0.0006855592, y: 0.0012375674, z: 0.0011306314}
+      rotation: {x: 0.04527273, y: 0.34882775, z: 0.045969598, w: 0.93496335}
+      scale: {x: 1, y: 1, z: 0.99999994}
+      transformModified: 1
+    - name: thumb.02.R
+      position: {x: 8.090865e-11, y: 0.0006100311, z: 5.2386893e-11}
+      rotation: {x: 0.12559077, y: 0.3274424, z: -0.18886495, w: 0.91724503}
+      scale: {x: 1.0000001, y: 1.0000006, z: 1.0000002}
       transformModified: 1
     - name: thigh.L
       position: {x: -0.0012069346, y: -0.00087820133, z: 0.0002974334}
@@ -594,7 +611,7 @@ ModelImporter:
       transformModified: 1
     - name: thigh.R
       position: {x: 0.0012069318, y: -0.00087820075, z: 0.00029743306}
-      rotation: {x: 0.99263084, y: 0.050718967, z: 0.10278171, w: 0.039337743}
+      rotation: {x: 0.9926309, y: 0.05071897, z: 0.10278172, w: 0.039337747}
       scale: {x: 0.9999923, y: 0.99999994, z: 0.9999908}
       transformModified: 1
     - name: shin.R
@@ -626,21 +643,6 @@ ModelImporter:
       position: {x: 0.000000020247565, y: -0.000000031455066, z: 0.00000006270711}
       rotation: {x: 0.000000078679506, y: -7.119638e-14, z: 8.526424e-16, w: 1}
       scale: {x: 100, y: 100.00002, z: 100}
-      transformModified: 1
-    - name: machete
-      position: {x: 0.019448897, y: 0.05855571, z: -0.01170997}
-      rotation: {x: 0.5000002, y: 0.4999998, z: 0.5000001, w: -0.49999988}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: shortrifle
-      position: {x: 0.008928322, y: 0.08937139, z: -0.018999547}
-      rotation: {x: 0.6830128, y: -0.18301266, z: -0.18301274, w: 0.6830127}
-      scale: {x: 0.8738555, y: 0.8738555, z: 0.8738555}
-      transformModified: 1
-    - name: shortriflebutt
-      position: {x: -0, y: -0.0030000042, z: 0.015046777}
-      rotation: {x: 0.00066842424, y: 0.00000007450585, z: -0.00000004114167, w: 0.9999998}
-      scale: {x: 0.9999998, y: 1.0000002, z: 0.9999998}
       transformModified: 1
     armTwist: 0.5
     foreArmTwist: 0.5
