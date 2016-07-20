@@ -16,9 +16,10 @@ public class heromove : MonoBehaviour
     private float Y;
     Vector3 gravi;
     bool jump;
-    public float m;
+    bool injump;
     float g;
     public float V0;
+    float V;
     //public Transform zeropos;
 
     void Start()
@@ -26,10 +27,10 @@ public class heromove : MonoBehaviour
         hero = GetComponent<CharacterController>();
         cam = Camera.main.transform;
         jump = false;
+        injump = false;
         gravi = -Vector3.up;
         g = (float)9.8;
-        m = 50;
-        V0 = 1;
+        V0 = 3;
     }
 
     // Update is called once per frame
@@ -43,17 +44,30 @@ public class heromove : MonoBehaviour
         camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
         //рассчитаем вектор движения 
         move = (v * camForward + h * cam.right).normalized;
-        hero.Move(speed * move); //двигаем 
-        hero.Move(gravi); // прижимаем к земле
+        hero.Move(speed * move);
         if (move != Vector3.zero)
             transform.forward = move;
-        if(jump)
+        if (!injump)
         {
-            V0 = V0 - g * Time.deltaTime;
-            gravi.y = V0;
+            hero.Move(-Vector3.up);
         }
-
-        if (!jump) V0 = 5;
-
+        if (jump && hero.isGrounded && !injump)
+          {
+            injump = true;
+            V = V0;
+            V = V - g * Time.deltaTime;
+            gravi.y = V;
+            hero.Move(gravi); 
+        }
+          if (injump && !hero.isGrounded)
+          {
+            V = V - g * Time.deltaTime;
+            gravi.y = V;
+            hero.Move(gravi);
+        }
+          if (injump && hero.isGrounded)
+          {
+            injump = false;
+          }
     }
 }
