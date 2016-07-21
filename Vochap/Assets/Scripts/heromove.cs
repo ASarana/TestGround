@@ -30,7 +30,6 @@ public class heromove : MonoBehaviour
         injump = false;
         gravi = -Vector3.up;
         g = (float)9.8;
-        V0 = 3;
     }
 
     // Update is called once per frame
@@ -45,6 +44,8 @@ public class heromove : MonoBehaviour
         //рассчитаем вектор движения 
         move = (v * camForward + h * cam.right).normalized;
         hero.Move(speed * move);
+        
+
         if (move != Vector3.zero)
             transform.forward = move;
         if (!injump)
@@ -69,5 +70,13 @@ public class heromove : MonoBehaviour
           {
             injump = false;
           }
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.name == "box" || hit.gameObject.name == "box (1)" || hit.gameObject.name == "box (2)" || hit.gameObject.name == "container")
+        {
+            hit.rigidbody.velocity = move * 2;
+        }
     }
 }
