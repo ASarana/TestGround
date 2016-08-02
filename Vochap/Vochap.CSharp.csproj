@@ -69,7 +69,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\RPG Character Animation Pack\Code\RPGCharacterControllerFREE.cs" />
     <Compile Include="Assets\RPG Character Animation Pack\Code\SmoothFollow.cs" />
     <Compile Include="Assets\RPG Character Animation Pack\Elements\ImageEffects\Scripts\Bloom.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="Assets\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\Scripts\ButtonHandler.cs" />
     <Compile Include="Assets\Scripts\CamMove.cs" />
+    <Compile Include="Assets\Scripts\CoolMove.cs" />
     <Compile Include="Assets\Scripts\CrossPlatformInputInitialize.cs" />
     <Compile Include="Assets\Scripts\CrossPlatformInputManager.cs" />
     <Compile Include="Assets\Scripts\InputAxisScrollbar.cs" />
@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\PlatformSpecific\StandaloneInput.cs" />
     <Compile Include="Assets\Scripts\TiltInput.cs" />
     <Compile Include="Assets\Scripts\TouchPad.cs" />
+    <Compile Include="Assets\Scripts\UK.cs" />
     <Compile Include="Assets\Scripts\VirtualInput.cs" />
     <Compile Include="Assets\Scripts\heromove.cs" />
   </ItemGroup>

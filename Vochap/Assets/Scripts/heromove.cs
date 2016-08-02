@@ -45,20 +45,12 @@ public class heromove : MonoBehaviour
         //рассчитаем вектор движения 
         move = (v * camForward + h * cam.right).normalized;
         hero.Move(speed * move);
-        
+
         if (move != Vector3.zero)
+        {
             transform.forward = move;
-
-        //гипно код
-
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow))
-            {
             anima.SetBool("idletowalk", true);
-            }
-        else
-            {
-            anima.SetBool("idletowalk", false);
-            }
+        }
             
         if (!injump)
         {
