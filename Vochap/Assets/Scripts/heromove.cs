@@ -7,6 +7,7 @@ public class heromove : MonoBehaviour
 
     // Use this for initialization
     private CharacterController hero; //контроллер чтобы его двигать
+    public Animator anima;
     public float speed; //скорость и камеры
     private Vector3 move; //вектор движения 
     private Transform cam; //это чтобы рассчитать движение относительно камеры
@@ -25,6 +26,7 @@ public class heromove : MonoBehaviour
     void Start()
     {
         hero = GetComponent<CharacterController>();
+        anima = GetComponent<Animator>();
         cam = Camera.main.transform;
         jump = false;
         injump = false;
@@ -35,19 +37,29 @@ public class heromove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         h = CrossPlatformInputManager.GetAxis("Horizontal");
         v = CrossPlatformInputManager.GetAxis("Vertical");
         jump = CrossPlatformInputManager.GetButton("Jump");
-
+        anima.SetBool("idletowalk", false);
         camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
         //рассчитаем вектор движения 
         move = (v * camForward + h * cam.right).normalized;
         hero.Move(speed * move);
         
-
         if (move != Vector3.zero)
             transform.forward = move;
+
+        //гипно код
+
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow))
+            {
+            anima.SetBool("idletowalk", true);
+            }
+        else
+            {
+            anima.SetBool("idletowalk", false);
+            }
+            
         if (!injump)
         {
             hero.Move(-Vector3.up);
