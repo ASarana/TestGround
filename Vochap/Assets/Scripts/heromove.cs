@@ -49,6 +49,7 @@ public class heromove : MonoBehaviour
         if (move != Vector3.zero)
         {
             transform.forward = move;
+            if(!injump)
             anima.SetBool("idletowalk", true);
         }
             
@@ -65,6 +66,7 @@ public class heromove : MonoBehaviour
             gravi.y = V;
             hero.Move(gravi);
             anima.SetBool("jumpup", true);
+            anima.SetBool("idletowalk", false);
         }
           if (injump && !hero.isGrounded)
           {
