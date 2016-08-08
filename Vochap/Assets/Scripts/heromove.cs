@@ -55,6 +55,7 @@ public class heromove : MonoBehaviour
         if (!injump)
         {
             hero.Move(-Vector3.up);
+           // anima.SetBool("jumpdown", false);
         }
         if (jump && hero.isGrounded && !injump)
           {
@@ -62,18 +63,23 @@ public class heromove : MonoBehaviour
             V = V0;
             V = V - g * Time.deltaTime;
             gravi.y = V;
-            hero.Move(gravi); 
+            hero.Move(gravi);
+            anima.SetBool("jumpup", true);
         }
           if (injump && !hero.isGrounded)
           {
             V = V - g * Time.deltaTime;
             gravi.y = V;
             hero.Move(gravi);
+           // anima.SetBool("jumpup", true);
         }
           if (injump && hero.isGrounded)
           {
             injump = false;
-          }
+            V = 0;
+            anima.SetBool("jumpup", false);
+
+        }
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
