@@ -22,6 +22,7 @@ public class heromove : MonoBehaviour
     public float V0;
     float V;
     //public Transform zeropos;
+    public TextMesh debtext;
 
     void Start()
     {
@@ -40,23 +41,45 @@ public class heromove : MonoBehaviour
         h = CrossPlatformInputManager.GetAxis("Horizontal");
         v = CrossPlatformInputManager.GetAxis("Vertical");
         jump = CrossPlatformInputManager.GetButton("Jump");
-        anima.SetBool("idletowalk", false);
+        //anima.SetBool("idletowalk", false);
         camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
         //рассчитаем вектор движения 
         move = (v * camForward + h * cam.right).normalized;
-        hero.Move(speed * move);
+        debtext.transform.position = this.transform.position + new Vector3(-10, -11, -20);
+
+        debtext.text = "hero.isGrounded:" + hero.isGrounded.ToString() + '\n'
+            + "injump:" + injump.ToString() + '\n'
+            + "jump" + jump.ToString() + '\n'
+            + "V" + V.ToString() + '\n'
+            + "gravi" + gravi.ToString() + '\n'
+            + "anima idletowalk" + anima.GetBool("idletowalk") + '\n'
+            + "anima jumpup" + anima.GetBool("jumpup") + '\n'
+            + "anima jumpdown" + anima.GetBool("jumpdown") + '\n'
+            + "anima fall" + anima.GetBool("fall") + '\n'
+            ;
 
         if (move != Vector3.zero)
         {
             transform.forward = move;
-            if(!injump)
+            if(!injump && hero.isGrounded)
             anima.SetBool("idletowalk", true);
+            hero.Move(speed * move);
+        }
+        if (move == Vector3.zero)
+        {
+            anima.SetBool("idletowalk", false);
         }
             
-        if (!injump)
+        if (!injump && !hero.isGrounded)
         {
-            hero.Move(-Vector3.up);
-           // anima.SetBool("jumpdown", false);
+            // hero.Move(-Vector3.up);
+            // anima.SetBool("jumpdown", false);
+            V = 0;
+            V = V - g * Time.deltaTime;
+            gravi.y = V;
+            hero.Move(gravi);
+         //   anima.SetBool("idletowalk", false);
+            anima.SetBool("fall", true);
         }
         if (jump && hero.isGrounded && !injump)
           {
@@ -66,22 +89,33 @@ public class heromove : MonoBehaviour
             gravi.y = V;
             hero.Move(gravi);
             anima.SetBool("jumpup", true);
-            anima.SetBool("idletowalk", false);
+          //  anima.SetBool("idletowalk", false);
         }
           if (injump && !hero.isGrounded)
           {
             V = V - g * Time.deltaTime;
             gravi.y = V;
             hero.Move(gravi);
-           // anima.SetBool("jumpup", true);
+            if (V <= 0)
+            {
+                anima.SetBool("jumpup", false);
+                anima.SetBool("fall", true);
+            }
         }
-          if (injump && hero.isGrounded)
+        if (!injump && hero.isGrounded)
+        {
+            anima.SetBool("jumpdown", false);
+            anima.SetBool("fall", false);
+            V = 0;
+        }
+        if (injump && hero.isGrounded)
           {
             injump = false;
             V = 0;
-            anima.SetBool("jumpup", false);
-
+            anima.SetBool("fall", false);
+            anima.SetBool("jumpdown", true);
         }
+       
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
