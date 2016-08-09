@@ -56,8 +56,7 @@ public class heromove : MonoBehaviour
             + "anima jumpup" + anima.GetBool("jumpup") + '\n'
             + "anima jumpdown" + anima.GetBool("jumpdown") + '\n'
             + "anima fall" + anima.GetBool("fall") + '\n'
-            ;
-
+            + "anima push" + anima.GetBool("push") + '\n';
         if (move != Vector3.zero)
         {
             transform.forward = move;
@@ -68,6 +67,7 @@ public class heromove : MonoBehaviour
         if (move == Vector3.zero)
         {
             anima.SetBool("idletowalk", false);
+             anima.SetBool("push", false);
         }
             
         if (!injump && !hero.isGrounded)
@@ -120,9 +120,20 @@ public class heromove : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.name == "box" || hit.gameObject.name == "box (1)" || hit.gameObject.name == "box (2)" || hit.gameObject.name == "container")
+        if (hit.gameObject.tag == "box")
         {
-            hit.rigidbody.velocity = move * 2;
+            RaycastHit rhit;
+            Ray ray = new Ray();
+            ray.origin = new Vector3(hit.transform.position.x + hit.transform.lossyScale.x/2, hit.transform.position.y + hit.transform.lossyScale.y/2, hit.transform.position.z + hit.transform.lossyScale.z/2);
+            ray.direction = hit.moveDirection;
+            if (!hit.collider.Raycast(ray, out rhit, 1))
+            {
+                hit.transform.position += move / 4;
+            }
+            Debug.DrawRay(ray.origin, ray.direction);
+            anima.SetBool("push", true);
         }
+        
+
     }
 }
