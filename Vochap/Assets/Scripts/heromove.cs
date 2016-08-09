@@ -18,11 +18,13 @@ public class heromove : MonoBehaviour
     Vector3 gravi;
     bool jump;
     bool injump;
-    float g;
+    public float g;
     public float V0;
     float V;
     //public Transform zeropos;
     public TextMesh debtext;
+    string hitname;
+    
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class heromove : MonoBehaviour
         jump = false;
         injump = false;
         gravi = -Vector3.up;
-        g = (float)9.8;
+       // g = 5f;
     }
 
     // Update is called once per frame
@@ -49,14 +51,15 @@ public class heromove : MonoBehaviour
 
         debtext.text = "hero.isGrounded:" + hero.isGrounded.ToString() + '\n'
             + "injump:" + injump.ToString() + '\n'
-            + "jump" + jump.ToString() + '\n'
-            + "V" + V.ToString() + '\n'
+            + "jump:" + jump.ToString() + '\n'
+            + "V:" + V.ToString() + '\n'
             + "gravi" + gravi.ToString() + '\n'
-            + "anima idletowalk" + anima.GetBool("idletowalk") + '\n'
-            + "anima jumpup" + anima.GetBool("jumpup") + '\n'
-            + "anima jumpdown" + anima.GetBool("jumpdown") + '\n'
-            + "anima fall" + anima.GetBool("fall") + '\n'
-            + "anima push" + anima.GetBool("push") + '\n';
+            + "anima idletowalk:" + anima.GetBool("idletowalk") + '\n'
+            + "anima jumpup:" + anima.GetBool("jumpup") + '\n'
+            + "anima jumpdown:" + anima.GetBool("jumpdown") + '\n'
+            + "anima fall:" + anima.GetBool("fall") + '\n'
+            + "anima push:" + anima.GetBool("push") + '\n'
+            + "hit object:" + hitname + '\n';
         if (move != Vector3.zero)
         {
             transform.forward = move;
@@ -74,7 +77,7 @@ public class heromove : MonoBehaviour
         {
             // hero.Move(-Vector3.up);
             // anima.SetBool("jumpdown", false);
-            V = 0;
+          //  V = 0;
             V = V - g * Time.deltaTime;
             gravi.y = V;
             hero.Move(gravi);
@@ -115,17 +118,25 @@ public class heromove : MonoBehaviour
             anima.SetBool("fall", false);
             anima.SetBool("jumpdown", true);
         }
-       
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        hitname = hit.gameObject.name;
         if (hit.gameObject.tag == "box")
         {
-            RaycastHit rhit;
+           /* Ray[,] ray = new Ray[5, 5];
+            for(int i=0; i<5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+
+                }*/
+
+
+             RaycastHit rhit;
             Ray ray = new Ray();
             ray.origin = new Vector3(hit.transform.position.x + hit.transform.lossyScale.x/2, hit.transform.position.y + hit.transform.lossyScale.y/2, hit.transform.position.z + hit.transform.lossyScale.z/2);
-            ray.direction = hit.moveDirection;
+            ray.direction = hit.moveDirection; 
             if (!hit.collider.Raycast(ray, out rhit, 1))
             {
                 hit.transform.position += move / 4;
@@ -133,7 +144,6 @@ public class heromove : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction);
             anima.SetBool("push", true);
         }
-        
-
+        //else anima.SetBool("push", false);
     }
 }
