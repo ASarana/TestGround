@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d1dddf3d6a440db468fe2e47bfa7cdd4
-timeCreated: 1470678673
+guid: 013d037209babd8468d268ceff755f71
+timeCreated: 1470770918
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -120,7 +120,7 @@ ModelImporter:
     400110: vochapDT
     400112: vochapMR
     4300000: vochapDT
-    7400000: v_amin_jump
+    7400000: v_anim_air
     9500000: //RootNode
     13700000: vochapDT
   materials:
@@ -137,7 +137,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -145,7 +145,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: v_amin_jump
+      name: v_anim_air
       takeName: vochapMR|vochapMRAction
       firstFrame: 0
       lastFrame: 32
