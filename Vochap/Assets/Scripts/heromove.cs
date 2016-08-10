@@ -85,7 +85,7 @@ public class heromove : MonoBehaviour
          //   anima.SetBool("idletowalk", false);
             anima.SetBool("fall", true);
         }
-        if (jump && hero.isGrounded && !injump)
+        if (jump && hero.isGrounded && !injump && !anima.GetBool("push"))
           {
             injump = true;
             V = V0;
@@ -132,9 +132,12 @@ public class heromove : MonoBehaviour
         if (hit.moveDirection.y < -0.3F)
             return;
 
-        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-        body.velocity = pushDir * pushPower;
-        if(pushDir != Vector3.zero) anima.SetBool("push", true);
+        if (hero.isGrounded)
+        {
+            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+            body.velocity = pushDir * pushPower;
+            if (pushDir != Vector3.zero) anima.SetBool("push", true);
+        }
     }
 
 }
