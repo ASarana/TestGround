@@ -24,7 +24,8 @@ public class heromove : MonoBehaviour
     //public Transform zeropos;
     public TextMesh debtext;
     string hitname;
-    
+    public float pushPower = 2.0F;
+
 
     void Start()
     {
@@ -122,28 +123,18 @@ public class heromove : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        hitname = hit.gameObject.name;
-        if (hit.gameObject.tag == "box")
-        {
-           /* Ray[,] ray = new Ray[5, 5];
-            for(int i=0; i<5; i++)
-                for (int j = 0; j < 5; j++)
-                {
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body == null || body.isKinematic)
+            return; 
 
-                }*/
+        else hitname = hit.gameObject.name;
 
+        if (hit.moveDirection.y < -0.3F)
+            return;
 
-             RaycastHit rhit;
-            Ray ray = new Ray();
-            ray.origin = new Vector3(hit.transform.position.x + hit.transform.lossyScale.x/2, hit.transform.position.y + hit.transform.lossyScale.y/2, hit.transform.position.z + hit.transform.lossyScale.z/2);
-            ray.direction = hit.moveDirection; 
-            if (!hit.collider.Raycast(ray, out rhit, 1))
-            {
-                hit.transform.position += move / 4;
-            }
-            Debug.DrawRay(ray.origin, ray.direction);
-            anima.SetBool("push", true);
-        }
-        //else anima.SetBool("push", false);
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.velocity = pushDir * pushPower;
+        if(pushDir != Vector3.zero) anima.SetBool("push", true);
     }
+
 }
