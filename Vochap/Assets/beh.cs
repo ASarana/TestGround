@@ -16,30 +16,44 @@ public class beh : MonoBehaviour {
     public float g;
     public float V0;
     float V;
+    public setka setka;
+    Vector3[,] point = new Vector3[600, 300];
+    int ii =5;
+    int jj = 5;
+
     // Use this for initialization
     void Start () {
         agent = GetComponent<NavMeshAgent>();
         anima = GetComponent<Animator>();
+        this.transform.position = setka.setk[ii,jj];
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        h = CrossPlatformInputManager.GetAxis("Horizontal");
-        v = CrossPlatformInputManager.GetAxis("Vertical");
+        if(CrossPlatformInputManager.GetAxis("Vertical")==0)
+            h = CrossPlatformInputManager.GetAxis("Horizontal");
+
+        if (CrossPlatformInputManager.GetAxis("Horizontal") == 0)
+         v = CrossPlatformInputManager.GetAxis("Vertical");
+
         jump = CrossPlatformInputManager.GetButton("Jump");
 
-        if(agent.remainingDistance>=0 && agent.remainingDistance < 10)
+
+        if(agent.remainingDistance>=0 && agent.remainingDistance<= (setka.setk[2, 1].z - setka.setk[1, 1].z)/2)
         {
-            if (h > 0)
-                agent.destination = this.transform.position + new Vector3(0,0,20);
-            if (h < 0)
-                agent.destination = this.transform.position + new Vector3(0, 0, -20);
-            if (v > 0)
-                agent.destination = this.transform.position + new Vector3(-20, 0, 0);
-            if (v < 0)
-                agent.destination = this.transform.position + new Vector3(20, 0, 0);
+            if (h > 0 && ii<setka.kletx) ii++;
+              //  agent.destination = this.transform.position + new Vector3(0,0,20);
+            if (h < 0 && ii > 1) ii--;
+              //  agent.destination = this.transform.position + new Vector3(0, 0, -20);
+            if (v > 0 && jj > 1) jj--;
+             //   agent.destination = this.transform.position + new Vector3(-20, 0, 0);
+            if (v < 0 && jj < setka.kletz) jj++;
+            //   agent.destination = this.transform.position + new Vector3(20, 0, 0);
+            agent.destination = setka.setk[ii, jj];
         }
+
+        print(setka.setk[2, 1].z - setka.setk[1, 1].z);
 
         if (agent.remainingDistance == 0) anima.SetBool("idletowalk", false);
         else anima.SetBool("idletowalk", true);

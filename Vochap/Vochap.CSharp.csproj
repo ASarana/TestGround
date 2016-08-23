@@ -137,6 +137,7 @@
     <Compile Include="Assets\Scripts\heromove.cs" />
     <Compile Include="Assets\beh.cs" />
     <Compile Include="Assets\boxbeh.cs" />
+    <Compile Include="Assets\setka.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
