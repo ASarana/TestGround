@@ -3,16 +3,16 @@ using System.Collections;
 
 public class setka : MonoBehaviour {
 
-    public int kletx;
-    public int kletz;
+    public int kletx = 50;
+    public int kletz = 50;
     public Vector3[,] setk = new Vector3[600,300];
     Terrain tc;
 
     // Use this for initialization
     void Awake()
     {
-        kletx = 25;
-        kletz = 25;
+      //  kletx = 50;
+      //  kletz = 50;
         tc = GetComponent<Terrain>();
         for (int i = 0; i < kletz; i++)
             for (int j = 0; j < kletx; j++)

@@ -43,13 +43,9 @@ public class beh : MonoBehaviour {
         if(agent.remainingDistance>=0 && agent.remainingDistance<= (setka.setk[2, 1].z - setka.setk[1, 1].z)/2)
         {
             if (h > 0 && ii<setka.kletx) ii++;
-              //  agent.destination = this.transform.position + new Vector3(0,0,20);
             if (h < 0 && ii > 1) ii--;
-              //  agent.destination = this.transform.position + new Vector3(0, 0, -20);
             if (v > 0 && jj > 1) jj--;
-             //   agent.destination = this.transform.position + new Vector3(-20, 0, 0);
             if (v < 0 && jj < setka.kletz) jj++;
-            //   agent.destination = this.transform.position + new Vector3(20, 0, 0);
             agent.destination = setka.setk[ii, jj];
         }
 
