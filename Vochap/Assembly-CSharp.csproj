@@ -104,10 +104,10 @@
      <Compile Include="Assets\Scripts\TouchPad.cs" />
      <Compile Include="Assets\Scripts\UK.cs" />
      <Compile Include="Assets\Scripts\VirtualInput.cs" />
+     <Compile Include="Assets\Scripts\beh.cs" />
+     <Compile Include="Assets\Scripts\boxbeh.cs" />
      <Compile Include="Assets\Scripts\heromove.cs" />
-     <Compile Include="Assets\beh.cs" />
-     <Compile Include="Assets\boxbeh.cs" />
-     <Compile Include="Assets\setka.cs" />
+     <Compile Include="Assets\Scripts\setka.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\RPG Character Animation Pack\Elements\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\RPG Character Animation Pack\Elements\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
