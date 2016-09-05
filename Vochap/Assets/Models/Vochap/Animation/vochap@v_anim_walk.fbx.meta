@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 2f63c57ec6326714892bd39e3d18a93f
-timeCreated: 1470679897
+guid: cb9f3e0146408c44aa82e1c60119d24e
+timeCreated: 1473106053
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -120,7 +120,7 @@ ModelImporter:
     400110: vochapDT
     400112: vochapMR
     4300000: vochapDT
-    7400000: v_anim_run
+    7400000: v_anim_walk
     9500000: //RootNode
     13700000: vochapDT
   materials:
@@ -130,17 +130,14 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'vochapMR|vochapMRAction' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation DOF
-      on avatar to improve retargeting quality.\n\t'chest' has scale animation that
-      will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -148,7 +145,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: v_anim_run
+      name: v_anim_walk
       takeName: vochapMR|vochapMRAction
       firstFrame: 0
       lastFrame: 48
@@ -175,7 +172,7 @@ ModelImporter:
       - path: 
         weight: 1
       - path: vochapDT
-        weight: 0
+        weight: 1
       - path: vochapMR
         weight: 1
       - path: vochapMR/hips
@@ -189,7 +186,7 @@ ModelImporter:
       - path: vochapMR/hips/spine/chest/neck/head
         weight: 1
       - path: vochapMR/hips/spine/chest/neck/head/head_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L
@@ -205,13 +202,13 @@ ModelImporter:
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L/f_index.02.L
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L/f_index.02.L/f_index.02.L_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L/thumb.02.L
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/thumb.01.L/thumb.02.L/thumb.02.L_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L
@@ -219,7 +216,7 @@ ModelImporter:
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L/f_middle.02.L
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.02.L/f_middle.01.L/f_middle.02.L/f_middle.02.L_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L
@@ -227,7 +224,7 @@ ModelImporter:
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L/f_ring.02.L
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.03.L/f_ring.01.L/f_ring.02.L/f_ring.02.L_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R
@@ -243,13 +240,13 @@ ModelImporter:
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R/f_index.02.R
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R/f_index.02.R/f_index.02.R_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R/thumb.02.R
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/thumb.01.R/thumb.02.R/thumb.02.R_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R
@@ -257,7 +254,7 @@ ModelImporter:
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R/f_middle.02.R
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.02.R/f_middle.01.R/f_middle.02.R/f_middle.02.R_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R
@@ -265,7 +262,7 @@ ModelImporter:
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R/f_ring.02.R
         weight: 1
       - path: vochapMR/hips/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.03.R/f_ring.01.R/f_ring.02.R/f_ring.02.R_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/thigh.L
         weight: 1
       - path: vochapMR/hips/thigh.L/shin.L
@@ -275,7 +272,7 @@ ModelImporter:
       - path: vochapMR/hips/thigh.L/shin.L/foot.L/toe.L
         weight: 1
       - path: vochapMR/hips/thigh.L/shin.L/foot.L/toe.L/toe.L_end
-        weight: 0
+        weight: 1
       - path: vochapMR/hips/thigh.R
         weight: 1
       - path: vochapMR/hips/thigh.R/shin.R
@@ -285,7 +282,7 @@ ModelImporter:
       - path: vochapMR/hips/thigh.R/shin.R/foot.R/toe.R
         weight: 1
       - path: vochapMR/hips/thigh.R/shin.R/foot.R/toe.R/toe.R_end
-        weight: 0
+        weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
@@ -295,7 +292,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 0
+    importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
