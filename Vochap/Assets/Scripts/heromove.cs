@@ -25,13 +25,6 @@ public class heromove : MonoBehaviour
     public TextMesh debtext;
     string hitname;
     public float pushPower = 2.0F;
-    bool horpush;
-    bool vertpush;
-    Vector3 lefts;
-    Vector3 rightss;
-    Vector3 forwards; 
-    Vector3 backs;
-    Vector3 hitpoint;
 
 
     void Start()
@@ -42,16 +35,14 @@ public class heromove : MonoBehaviour
         jump = false;
         injump = false;
         gravi = -Vector3.up;
-        // g = 5f;
-         horpush = false;
-         vertpush=false;
+       // g = 5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!vertpush) h = CrossPlatformInputManager.GetAxis("Horizontal");
-        if (!horpush) v = CrossPlatformInputManager.GetAxis("Vertical");
+        h = CrossPlatformInputManager.GetAxis("Horizontal");
+        v = CrossPlatformInputManager.GetAxis("Vertical");
         jump = CrossPlatformInputManager.GetButton("Jump");
         //anima.SetBool("idletowalk", false);
         camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
@@ -69,12 +60,7 @@ public class heromove : MonoBehaviour
             + "anima jumpdown:" + anima.GetBool("jumpdown") + '\n'
             + "anima fall:" + anima.GetBool("fall") + '\n'
             + "anima push:" + anima.GetBool("push") + '\n'
-            + "hit object:" + hitname + '\n'
-            + "hit point left:" + lefts.ToString() + '\n'
-            + "hit point right:" + rightss.ToString() + '\n'
-            + "hit point forw:" + forwards.ToString() + '\n'
-            + "hit point back:" + backs.ToString() + '\n'
-            + "hit point:" + hitpoint.ToString() + '\n';
+            + "hit object:" + hitname + '\n';
         if (move != Vector3.zero)
         {
             transform.forward = move;
@@ -86,8 +72,6 @@ public class heromove : MonoBehaviour
         {
             anima.SetBool("idletowalk", false);
              anima.SetBool("push", false);
-            horpush = false;
-            vertpush = false;
         }
             
         if (!injump && !hero.isGrounded)
@@ -140,8 +124,8 @@ public class heromove : MonoBehaviour
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody body = hit.collider.attachedRigidbody;
-        if (body == null || body.isKinematic || body.gameObject.name=="Terrain")
-             return; 
+        if (body == null || body.isKinematic)
+            return; 
 
         else hitname = hit.gameObject.name;
 
@@ -151,24 +135,8 @@ public class heromove : MonoBehaviour
         if (hero.isGrounded)
         {
             Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-           
-
-             forwards = new Vector3(hit.collider.transform.position.x - hit.collider.transform.lossyScale.x/2, hit.collider.transform.position.y, hit.collider.transform.position.z);
-             backs = new Vector3(hit.collider.transform.position.x + hit.collider.transform.lossyScale.x / 2, hit.collider.transform.position.y, hit.collider.transform.position.z);
-             rightss = new Vector3(hit.collider.transform.position.x, hit.collider.transform.position.y, hit.collider.transform.position.z + hit.collider.transform.lossyScale.z / 2);
-             lefts = new Vector3(hit.collider.transform.position.x, hit.collider.transform.position.y, hit.collider.transform.position.z - hit.collider.transform.lossyScale.z / 2);
-            hitpoint = hit.point;
-
-            if ((hit.point.z == lefts.z && ((hit.point.x >= lefts.x-3) && (hit.point.x <= lefts.x + 3)) || (hit.point.z == rightss.z && (hit.point.x >= rightss.x - 3) && (hit.point.x <= rightss.x + 3)) || (hit.point.x == forwards.x && (hit.point.z >= forwards.z - 3) && (hit.point.z <= forwards.z + 3)) || (hit.point.x == backs.x && (hit.point.z >= backs.z - 3) && (hit.point.z <= backs.z + 3))) 
-                && pushDir != Vector3.zero 
-                && (pushDir == Vector3.forward || pushDir == Vector3.back || pushDir == Vector3.right || pushDir == Vector3.left))
-            {
-                anima.SetBool("push", true);
-                if (pushDir.normalized == Vector3.forward || pushDir.normalized == Vector3.back) horpush = true;
-                if (pushDir.normalized == Vector3.left || pushDir.normalized == Vector3.right) vertpush = true;
-                body.velocity = pushDir * pushPower;
-            }
-
+            body.velocity = pushDir * pushPower;
+            if (pushDir != Vector3.zero) anima.SetBool("push", true);
         }
     }
 
