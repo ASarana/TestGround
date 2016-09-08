@@ -18,6 +18,7 @@ public class heromove : MonoBehaviour
     Vector3 gravi;
     bool jump;
     bool injump;
+    bool testkey;
     public float g;
     public float V0;
     float V;
@@ -41,6 +42,7 @@ public class heromove : MonoBehaviour
         cam = Camera.main.transform;
         jump = false;
         injump = false;
+        testkey = false;
         gravi = -Vector3.up;
         // g = 5f;
          horpush = false;
@@ -53,6 +55,10 @@ public class heromove : MonoBehaviour
         if(!vertpush) h = CrossPlatformInputManager.GetAxis("Horizontal");
         if (!horpush) v = CrossPlatformInputManager.GetAxis("Vertical");
         jump = CrossPlatformInputManager.GetButton("Jump");
+        testkey = CrossPlatformInputManager.GetButton("Fire1");
+        if(testkey) anima.SetBool("testanim", true);
+        else anima.SetBool("testanim", false);
+
         //anima.SetBool("idletowalk", false);
         camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
         //рассчитаем вектор движения 
