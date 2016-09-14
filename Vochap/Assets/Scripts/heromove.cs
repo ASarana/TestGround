@@ -33,7 +33,9 @@ public class heromove : MonoBehaviour
     Vector3 forwards; 
     Vector3 backs;
     Vector3 hitpoint;
-
+    static GameObject rightgun;
+    static GameObject backgun;
+    GameObject leftgun;
 
     void Start()
     {
@@ -47,6 +49,11 @@ public class heromove : MonoBehaviour
         // g = 5f;
          horpush = false;
          vertpush=false;
+        // shotgun_vochap, machete_vochap, hand.R, neck
+
+        rightgun = GameObject.Find("machete_vochap1");
+        backgun = GameObject.Find("machete_vochap");
+        Debug.Log(rightgun);
     }
 
     // Update is called once per frame
@@ -56,8 +63,23 @@ public class heromove : MonoBehaviour
         if (!horpush) v = CrossPlatformInputManager.GetAxis("Vertical");
         jump = CrossPlatformInputManager.GetButton("Jump");
         testkey = CrossPlatformInputManager.GetButton("Fire1");
-        if(testkey) anima.SetBool("testanim", true);
-        else anima.SetBool("testanim", false);
+        if (testkey)
+        {
+            // anima.SetBool("testanim", true);
+           //  GameObject.Find("machete_vochap").SetActive(false);
+           //  GameObject.Find("machete_vochap1").SetActive(true);
+          //  Object.Instantiate(rightgun);
+            rightgun.SetActive(true);
+            backgun.SetActive(false);
+        }
+        else
+        {
+            //anima.SetBool("testanim", false);
+            //  GameObject.Find("machete_vochap").SetActive(true);
+            // GameObject.Find("machete_vochap1").SetActive(false);
+            rightgun.SetActive(false);
+            backgun.SetActive(true);
+        }
 
         //anima.SetBool("idletowalk", false);
         camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
