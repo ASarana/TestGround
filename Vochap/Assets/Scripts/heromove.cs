@@ -123,7 +123,7 @@ public class heromove : MonoBehaviour
             // hero.Move(-Vector3.up);
             // anima.SetBool("jumpdown", false);
           //  V = 0;
-            V = V - g * Time.deltaTime;
+            V = V - g * Time.fixedDeltaTime;
             gravi.y = V;
             hero.Move(gravi);
          //   anima.SetBool("idletowalk", false);
@@ -133,7 +133,7 @@ public class heromove : MonoBehaviour
           {
             injump = true;
             V = V0;
-            V = V - g * Time.deltaTime;
+            V = V - g * Time.fixedDeltaTime;
             gravi.y = V;
             hero.Move(gravi);
             anima.SetBool("jumpup", true);
@@ -141,7 +141,7 @@ public class heromove : MonoBehaviour
         }
           if (injump && !hero.isGrounded)
           {
-            V = V - g * Time.deltaTime;
+            V = V - g * Time.fixedDeltaTime;
             gravi.y = V;
             hero.Move(gravi);
             if (V <= 0)
