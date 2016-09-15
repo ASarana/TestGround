@@ -65,7 +65,7 @@ public class heromove : MonoBehaviour
         testkey = CrossPlatformInputManager.GetButton("Fire1");
         if (testkey)
         {
-            // anima.SetBool("testanim", true);
+            anima.SetBool("testanim", true);
            //  GameObject.Find("machete_vochap").SetActive(false);
            //  GameObject.Find("machete_vochap1").SetActive(true);
           //  Object.Instantiate(rightgun);
