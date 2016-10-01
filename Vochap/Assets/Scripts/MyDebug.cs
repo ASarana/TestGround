@@ -22,6 +22,7 @@ public class MyDebug : MonoBehaviour {
 
     public void AddParamDebug (string _name, string _param)
     {
+        if (_name == null) return;
         for (int i = 0; i < debi; i++)
         {
             if (names[i] == _name)
