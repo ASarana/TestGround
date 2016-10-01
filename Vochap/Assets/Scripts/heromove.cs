@@ -6,11 +6,17 @@ public class heromove : MonoBehaviour
 {
 
     // Use this for initialization
+    public float m_StationaryTurnSpeed = 540;
+    public float m_MovingTurnSpeed = 540;
+    float m_ForwardAmount;
+    float m_TurnAmount;
+
     public MyDebug Mydebug; // скрипт для отладки, котрорый выводит в тестовое поле все отлаживаемые переменые
     private CharacterController hero; //контроллер чтобы двигать персонажа
     Animator anima;
-    public float RunSpeed; //множитель скорости персонажа
+    public float RunSpeed = 1; //множитель скорости персонажа
     private Vector3 move; //вектор движения 
+    Vector3 move2;
     private Transform cam; //это чтобы рассчитать движение относительно камеры
     private Vector3 camForward; //это чтобы рассчитать движение относительно камеры
 
@@ -39,11 +45,11 @@ public class heromove : MonoBehaviour
     float h2; //правый стик
 
     public float g; //ускорение свободного падения
-    public float JumpSpeed;  //сила толчка при прыжке
+    public float JumpSpeed = 2;  //сила толчка при прыжке
     float V; //вертикальная скорость персонажа припрыжке (может быть отрицательная когда летит вниз)
     //public Transform zeropos;
     public TextMesh debtext; //текстовое поле для дебага
-    public float pushPower; //множитель скорости толкания предмета
+    public float pushPower=4; //множитель скорости толкания предмета
    // bool horpush; //если персонаж уже толкает по горизонтали
    // bool vertpush; //если персонаж уже толкает по вертикали
     int nothorpush; //если персонаж уже толкает по горизонтали
@@ -71,6 +77,18 @@ public class heromove : MonoBehaviour
         
         ReadInput(); // считываю кнопки
         move = (v * camForward * nothorpush + h * cam.right*notvertpush).normalized;  //рассчитаем вектор движения 
+
+
+        if (move.magnitude > 1f) move.Normalize();
+       
+        move2 = transform.InverseTransformDirection(move);
+       // CheckGroundStatus();
+
+        move2 = Vector3.ProjectOnPlane(move2, Vector3.up);
+        m_TurnAmount = Mathf.Atan2(move2.x, move2.z);
+        m_ForwardAmount = move2.z;
+        ApplyExtraTurnRotation();
+
         MyHeroMove(); //двигаем персонажа по вектору
 
         WeaponChange(WeaponSwich); //вркменно тут для смены оружия
@@ -136,7 +154,7 @@ public class heromove : MonoBehaviour
     {
         if (move != Vector3.zero)
         {
-            transform.forward = move;
+           // transform.forward = move;
             if (!injump && hero.isGrounded)
                 anima.SetBool("idletowalk", true);
             hero.Move(RunSpeed * move);
@@ -189,6 +207,13 @@ public class heromove : MonoBehaviour
             anima.SetBool("fall", false);
             anima.SetBool("jumpdown", true);
         }
+    }
+
+    void ApplyExtraTurnRotation()
+    {
+        // help the character turn faster (this is in addition to root rotation in the animation)
+        float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
+        transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
     }
 
     void WeaponChange(float change) //смена оружия
