@@ -31,6 +31,7 @@ public class heromove : MonoBehaviour
     float Throw2;
     bool jump; //хранит нажатие кнопки прыжка
     float WeaponSwich;
+    bool WeaponHide;
     bool WeaponSwichK;
     float ItemSwichUp;
     float ItemSwichDown;
@@ -100,9 +101,15 @@ public class heromove : MonoBehaviour
         ApplyExtraTurnRotation();
         MyHeroMove(); //двигаем персонажа по вектору
         if(WeaponSwichK)
-        WeaponChange(); //вркменно тут для смены оружия
-        if (WeaponSwich>=1)
-            WeaponChange(); //вркменно тут для смены оружия
+        WeaponChange(false); //вркменно тут для смены оружия
+
+        if (WeaponHide)
+            WeaponChange(true); //вркменно тут для смены оружия
+
+        if (WeaponSwich>0)
+            WeaponChange(false); //вркменно тут для смены оружия
+        if (WeaponSwich < 0)
+            WeaponChange(true); //вркменно тут для смены оружия
 
 
 
@@ -135,7 +142,7 @@ public class heromove : MonoBehaviour
         if (hit.moveDirection.y < -0.3F) //хз зачем оно
             return;
 
-        if (hero.isGrounded) //если персонаж на земле, то двигаем
+        if (hero.isGrounded && slot1on.transform.childCount==0 && slot2on.transform.childCount == 0) //если персонаж на земле, то двигаем
         {
             //тут идёт рассчет стороны и точки приложения силы, чтобы правильно обработать отпускание. Так же чтобы не менять направление при движении
             Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
@@ -235,31 +242,40 @@ public class heromove : MonoBehaviour
         transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
     }
 
-    void WeaponChange()
+    void WeaponChange(bool hide)
     {
         if (Time.frameCount - lastframe > 50)
         {
-
-            if (gun.transform.parent == slot2on.transform)
+            if (!hide)
             {
-                sword.transform.SetParent(slot1on.transform,false);
-                gun.transform.SetParent(slot2off.transform,false);
-                lastframe = Time.frameCount;
-                return;
+                if (gun.transform.parent == slot2on.transform)
+                {
+                    sword.transform.SetParent(slot1on.transform, false);
+                    gun.transform.SetParent(slot2off.transform, false);
+                    lastframe = Time.frameCount;
+                    return;
+                }
+                if (sword.transform.parent == slot1on.transform)
+                {
+                    sword.transform.SetParent(slot1off.transform, false);
+                    gun.transform.SetParent(slot2on.transform, false);
+                    lastframe = Time.frameCount;
+                    return;
+                }
+
+                if (sword.transform.parent != slot1on.transform && gun.transform.parent != slot2on.transform)
+                {
+
+                    sword.transform.SetParent(slot1on.transform, false);
+
+                    lastframe = Time.frameCount;
+                    return;
+                }
             }
-            if (sword.transform.parent == slot1on.transform)
+            else
             {
                 sword.transform.SetParent(slot1off.transform, false);
-                gun.transform.SetParent(slot2on.transform, false);
-                lastframe = Time.frameCount;
-                return;
-            }
-
-            if (sword.transform.parent != slot1on.transform && gun.transform.parent != slot2on.transform)
-            {
-               
-                sword.transform.SetParent(slot1on.transform,false);
-          
+                gun.transform.SetParent(slot2off.transform, false);
                 lastframe = Time.frameCount;
                 return;
             }
@@ -281,6 +297,7 @@ public class heromove : MonoBehaviour
 
         WeaponSwich = CrossPlatformInputManager.GetAxis("WeaponSwich");
         WeaponSwichK = CrossPlatformInputManager.GetButton("WeaponSwichK");
+        WeaponHide = CrossPlatformInputManager.GetButton("WeaponHide");
         ItemSwichUp = CrossPlatformInputManager.GetAxis("ItemSwichUp");
         ItemSwichDown = CrossPlatformInputManager.GetAxis("ItemSwichDown");
         ThrowSwich = CrossPlatformInputManager.GetAxis("ThrowSwich");
