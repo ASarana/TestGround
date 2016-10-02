@@ -10,6 +10,7 @@ public class heromove : MonoBehaviour
     public float m_MovingTurnSpeed = 540;
     float m_ForwardAmount;
     float m_TurnAmount;
+    int lastframe; //для переключения оружия (период)
 
     public MyDebug Mydebug; // скрипт для отладки, котрорый выводит в тестовое поле все отлаживаемые переменые
     private CharacterController hero; //контроллер чтобы двигать персонажа
@@ -30,6 +31,7 @@ public class heromove : MonoBehaviour
     float Throw2;
     bool jump; //хранит нажатие кнопки прыжка
     float WeaponSwich;
+    bool WeaponSwichK;
     float ItemSwichUp;
     float ItemSwichDown;
     float ThrowSwich;
@@ -54,10 +56,15 @@ public class heromove : MonoBehaviour
    // bool vertpush; //если персонаж уже толкает по вертикали
     int nothorpush; //если персонаж уже толкает по горизонтали
     int notvertpush; //если персонаж уже толкает по вертикали
-    static GameObject rightgun; //контейнр под оружие в правой руке
-    static GameObject backgun; //контейнер под оружие за спиной
-    static GameObject backgun2; //контейнер под второе оружие за спиной
-    static GameObject leftgun; //контейнер под оружие в левой руке
+     GameObject gun; //контейнр под оружие в правой руке
+     GameObject backgun; //контейнер под оружие за спиной
+     GameObject sword; //контейнер под второе оружие за спиной
+     GameObject backsword; //контейнер под оружие в левой руке
+
+     GameObject slot1on; //контейнр под оружие в правой руке
+     GameObject slot2on; //контейнер под оружие за спиной
+     GameObject slot1off; //контейнер под второе оружие за спиной
+     GameObject slot2off; //контейнер под оружие в левой руке
 
     void Start()
     {
@@ -65,9 +72,21 @@ public class heromove : MonoBehaviour
         anima = GetComponent<Animator>(); //инициализация компонента
         cam = Camera.main.transform; //положение камеры
         gravi = -Vector3.up; //гравитацию ставлю
-        rightgun = GameObject.Find("machete_vochap1"); //запоминаю объекты
-        backgun = GameObject.Find("machete_vochap");
-      //  Debug.Log(rightgun);
+        sword = GameObject.Find("machete_vochap"); //запоминаю объекты
+    //    backsword = GameObject.Find("machete_vochap");
+        gun = GameObject.Find("shotgun_vochap"); 
+     //   backgun = GameObject.Find("shotgun_vochap");
+
+        slot1off = GameObject.Find("slot1_USEOFF"); //запоминаю объекты
+        slot2off = GameObject.Find("slot2_USEOFF");
+        slot1on = GameObject.Find("slot1_USEON");
+        slot2on = GameObject.Find("slot2_USEON");
+
+        
+
+      //  sword.SetActive(false); //запоминаю объекты
+     //   gun.SetActive(false);
+        //  Debug.Log(rightgun);
     }
 
     // Update is called once per frame
@@ -78,23 +97,15 @@ public class heromove : MonoBehaviour
         ReadInput(); // считываю кнопки
         move = (v * camForward * nothorpush + h * cam.right*notvertpush).normalized;  //рассчитаем вектор движения 
 
-
-        if (move.magnitude > 1f) move.Normalize();
-       
-        move2 = transform.InverseTransformDirection(move);
-       // CheckGroundStatus();
-
-        move2 = Vector3.ProjectOnPlane(move2, Vector3.up);
-        m_TurnAmount = Mathf.Atan2(move2.x, move2.z);
-        m_ForwardAmount = move2.z;
         ApplyExtraTurnRotation();
-
         MyHeroMove(); //двигаем персонажа по вектору
+        if(WeaponSwichK)
+        WeaponChange(); //вркменно тут для смены оружия
+        if (WeaponSwich>=1)
+            WeaponChange(); //вркменно тут для смены оружия
 
-        WeaponChange(WeaponSwich); //вркменно тут для смены оружия
 
-        
-           
+
 
         debtext.transform.position = this.transform.position + new Vector3(-10, -11, -20); // текствовое поле отладки следует за персонажем
 
@@ -109,6 +120,9 @@ public class heromove : MonoBehaviour
         Mydebug.AddParamDebug("jumpdown", anima.GetBool("jumpdown").ToString());
         Mydebug.AddParamDebug("fall", anima.GetBool("fall").ToString());
         Mydebug.AddParamDebug("push", anima.GetBool("push").ToString());
+        Mydebug.AddParamDebug("Родитель меча", sword.transform.parent.name);
+        Mydebug.AddParamDebug("Родитель ружья", gun.transform.parent.name);
+
         Mydebug.ShowDebug(); // выводим дебаг
     }
 
@@ -211,23 +225,45 @@ public class heromove : MonoBehaviour
 
     void ApplyExtraTurnRotation()
     {
+        if (move.magnitude > 1f) move.Normalize();
+        move2 = transform.InverseTransformDirection(move);
+        move2 = Vector3.ProjectOnPlane(move2, Vector3.up);
+        m_TurnAmount = Mathf.Atan2(move2.x, move2.z);
+        m_ForwardAmount = move2.z;
         // help the character turn faster (this is in addition to root rotation in the animation)
         float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
         transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
     }
 
-    void WeaponChange(float change) //смена оружия
+    void WeaponChange()
     {
-        if (change>0)
+        if (Time.frameCount - lastframe > 50)
         {
-            anima.SetBool("testanim", true);
-            rightgun.SetActive(true);
-            backgun.SetActive(false);
-        }
-        else
-        {
-            rightgun.SetActive(false);
-            backgun.SetActive(true);
+
+            if (gun.transform.parent == slot2on.transform)
+            {
+                sword.transform.SetParent(slot1on.transform,false);
+                gun.transform.SetParent(slot2off.transform,false);
+                lastframe = Time.frameCount;
+                return;
+            }
+            if (sword.transform.parent == slot1on.transform)
+            {
+                sword.transform.SetParent(slot1off.transform, false);
+                gun.transform.SetParent(slot2on.transform, false);
+                lastframe = Time.frameCount;
+                return;
+            }
+
+            if (sword.transform.parent != slot1on.transform && gun.transform.parent != slot2on.transform)
+            {
+               
+                sword.transform.SetParent(slot1on.transform,false);
+          
+                lastframe = Time.frameCount;
+                return;
+            }
+
         }
     }
 
@@ -244,6 +280,7 @@ public class heromove : MonoBehaviour
         Throw2 = CrossPlatformInputManager.GetAxis("Throw2");
 
         WeaponSwich = CrossPlatformInputManager.GetAxis("WeaponSwich");
+        WeaponSwichK = CrossPlatformInputManager.GetButton("WeaponSwichK");
         ItemSwichUp = CrossPlatformInputManager.GetAxis("ItemSwichUp");
         ItemSwichDown = CrossPlatformInputManager.GetAxis("ItemSwichDown");
         ThrowSwich = CrossPlatformInputManager.GetAxis("ThrowSwich");
