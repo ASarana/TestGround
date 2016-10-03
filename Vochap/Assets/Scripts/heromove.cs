@@ -74,20 +74,12 @@ public class heromove : MonoBehaviour
         cam = Camera.main.transform; //положение камеры
         gravi = -Vector3.up; //гравитацию ставлю
         sword = GameObject.Find("machete_vochap"); //запоминаю объекты
-    //    backsword = GameObject.Find("machete_vochap");
         gun = GameObject.Find("shotgun_vochap"); 
-     //   backgun = GameObject.Find("shotgun_vochap");
-
         slot1off = GameObject.Find("slot1_USEOFF"); //запоминаю объекты
         slot2off = GameObject.Find("slot2_USEOFF");
         slot1on = GameObject.Find("slot1_USEON");
         slot2on = GameObject.Find("slot2_USEON");
 
-        
-
-      //  sword.SetActive(false); //запоминаю объекты
-     //   gun.SetActive(false);
-        //  Debug.Log(rightgun);
     }
 
     // Update is called once per frame
@@ -101,18 +93,14 @@ public class heromove : MonoBehaviour
         ApplyExtraTurnRotation();
         MyHeroMove(); //двигаем персонажа по вектору
         if(WeaponSwichK)
-        WeaponChange(false); //вркменно тут для смены оружия
+            swichwep(0); //вркменно тут для смены оружия
 
         if (WeaponHide)
-            WeaponChange(true); //вркменно тут для смены оружия
-
+            swichwep(2); //вркменно тут для смены оружия
         if (WeaponSwich>0)
-            WeaponChange(false); //вркменно тут для смены оружия
+            swichwep(0); //вркменно тут для смены оружия
         if (WeaponSwich < 0)
-            WeaponChange(true); //вркменно тут для смены оружия
-
-
-
+            swichwep(2); //вркменно тут для смены оружия
 
         debtext.transform.position = this.transform.position + new Vector3(-10, -11, -20); // текствовое поле отладки следует за персонажем
 
@@ -242,7 +230,48 @@ public class heromove : MonoBehaviour
         transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
     }
 
-    void WeaponChange(bool hide)
+    void swichwep(int hide)
+    {
+        if (hide==0 && Time.frameCount - lastframe > 50)
+        {
+            if (gun.transform.parent == slot2on.transform)
+            {
+                gun.transform.SetParent(slot2off.transform, false);
+                anima.SetBool("getsword", true);
+                lastframe = Time.frameCount;
+                return;
+            }
+            if (sword.transform.parent == slot1on.transform)
+            {
+                sword.transform.SetParent(slot1off.transform, false);
+                gun.transform.SetParent(slot2on.transform, false);
+                lastframe = Time.frameCount;
+                return;
+            }
+
+            if (sword.transform.parent != slot1on.transform && gun.transform.parent != slot2on.transform)
+            {
+                anima.SetBool("getsword", true);
+                lastframe = Time.frameCount;
+                return;
+            }
+        }
+        if(hide == 2 && Time.frameCount - lastframe > 50)
+        {
+            sword.transform.SetParent(slot1off.transform, false);
+            gun.transform.SetParent(slot2off.transform, false);
+            lastframe = Time.frameCount;
+            return;
+        }
+
+        if(hide==1)
+        {
+            sword.transform.SetParent(slot1on.transform, false);
+            anima.SetBool("getsword", false);
+        }
+
+    }
+  /*  void WeaponChange(bool hide)
     {
         if (Time.frameCount - lastframe > 50)
         {
@@ -282,7 +311,7 @@ public class heromove : MonoBehaviour
 
         }
     }
-
+*/
     void ReadInput() //метод чтения ввода с устройства
     {
         h = CrossPlatformInputManager.GetAxis("Horizontal");
