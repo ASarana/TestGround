@@ -67,6 +67,8 @@ public class heromove : MonoBehaviour
      GameObject slot1off; //контейнер под второе оружие за спиной
      GameObject slot2off; //контейнер под оружие в левой руке
 
+    bool getswordanim = true;
+
     void Start()
     {
         hero = GetComponent<CharacterController>(); //инициализация компонента
@@ -93,14 +95,14 @@ public class heromove : MonoBehaviour
         ApplyExtraTurnRotation();
         MyHeroMove(); //двигаем персонажа по вектору
         if(WeaponSwichK)
-            swichwep(0); //вркменно тут для смены оружия
-
+            swichwep("change"); //вркменно тут для смены оружия
         if (WeaponHide)
-            swichwep(2); //вркменно тут для смены оружия
+            swichwep("hide"); //вркменно тут для смены оружия
+
         if (WeaponSwich>0)
-            swichwep(0); //вркменно тут для смены оружия
+            swichwep("hide"); //вркменно тут для смены оружия
         if (WeaponSwich < 0)
-            swichwep(2); //вркменно тут для смены оружия
+            swichwep("change"); //вркменно тут для смены оружия
 
         debtext.transform.position = this.transform.position + new Vector3(-10, -11, -20); // текствовое поле отладки следует за персонажем
 
@@ -116,7 +118,8 @@ public class heromove : MonoBehaviour
         Mydebug.AddParamDebug("fall", anima.GetBool("fall").ToString());
         Mydebug.AddParamDebug("push", anima.GetBool("push").ToString());
         Mydebug.AddParamDebug("Родитель меча", sword.transform.parent.name);
-        Mydebug.AddParamDebug("Родитель ружья", gun.transform.parent.name);
+        Mydebug.AddParamDebug("Родитель ружья", gun.transform.parent.name); 
+        Mydebug.AddParamDebug("Анимация отграна?", getswordanim.ToString());
 
         Mydebug.ShowDebug(); // выводим дебаг
     }
@@ -230,88 +233,47 @@ public class heromove : MonoBehaviour
         transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
     }
 
-    void swichwep(int hide)
+    void swichwep(string param) // тестовый метод для анимирования смены оружия и самой смены
     {
-        if (hide==0 && Time.frameCount - lastframe > 50)
+        if (param=="change" && getswordanim)
         {
-            if (gun.transform.parent == slot2on.transform)
-            {
-                gun.transform.SetParent(slot2off.transform, false);
-                anima.SetBool("getsword", true);
-                lastframe = Time.frameCount;
-                return;
-            }
             if (sword.transform.parent == slot1on.transform)
             {
                 sword.transform.SetParent(slot1off.transform, false);
-                gun.transform.SetParent(slot2on.transform, false);
-                lastframe = Time.frameCount;
                 return;
             }
 
-            if (sword.transform.parent != slot1on.transform && gun.transform.parent != slot2on.transform)
+            if (sword.transform.parent != slot1on.transform)
             {
-                anima.SetBool("getsword", true);
-                lastframe = Time.frameCount;
+                anima.SetBool("getsword", true);              
                 return;
             }
         }
-        if(hide == 2 && Time.frameCount - lastframe > 50)
+        if(param == "hide" && getswordanim)
         {
             sword.transform.SetParent(slot1off.transform, false);
             gun.transform.SetParent(slot2off.transform, false);
-            lastframe = Time.frameCount;
             return;
         }
 
-        if(hide==1)
+        if(param=="takemoment")
         {
-            sword.transform.SetParent(slot1on.transform, false);
+            getswordanim = false;
+            sword.transform.SetParent(slot1on.transform, false);            
+        }
+    }
+
+    void animend (string param) // тестовый метод для отслеживания окончания анимации
+    {
+        Debug.Log(1);
+        if (param == "sword")
+        {
+            getswordanim = true;
             anima.SetBool("getsword", false);
         }
 
     }
-  /*  void WeaponChange(bool hide)
-    {
-        if (Time.frameCount - lastframe > 50)
-        {
-            if (!hide)
-            {
-                if (gun.transform.parent == slot2on.transform)
-                {
-                    sword.transform.SetParent(slot1on.transform, false);
-                    gun.transform.SetParent(slot2off.transform, false);
-                    lastframe = Time.frameCount;
-                    return;
-                }
-                if (sword.transform.parent == slot1on.transform)
-                {
-                    sword.transform.SetParent(slot1off.transform, false);
-                    gun.transform.SetParent(slot2on.transform, false);
-                    lastframe = Time.frameCount;
-                    return;
-                }
 
-                if (sword.transform.parent != slot1on.transform && gun.transform.parent != slot2on.transform)
-                {
-
-                    sword.transform.SetParent(slot1on.transform, false);
-
-                    lastframe = Time.frameCount;
-                    return;
-                }
-            }
-            else
-            {
-                sword.transform.SetParent(slot1off.transform, false);
-                gun.transform.SetParent(slot2off.transform, false);
-                lastframe = Time.frameCount;
-                return;
-            }
-
-        }
-    }
-*/
     void ReadInput() //метод чтения ввода с устройства
     {
         h = CrossPlatformInputManager.GetAxis("Horizontal");
