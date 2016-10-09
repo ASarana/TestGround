@@ -235,19 +235,20 @@ public class heromove : MonoBehaviour
 
     void swichwep(string param) // тестовый метод для анимирования смены оружия и самой смены
     {
-        if (param=="change" && getswordanim)
+     if (param=="change" && getswordanim)
         {
-            if (sword.transform.parent == slot1on.transform)
+/*			if (sword.transform.parent == slot1on.transform)
             {
                 sword.transform.SetParent(slot1off.transform, false);
                 return;
             }
-
-            if (sword.transform.parent != slot1on.transform)
+*/
+			/* if (sword.transform.parent != slot1on.transform)
             {
                 anima.SetBool("getsword", true);              
                 return;
             }
+			*/
         }
         if(param == "hide" && getswordanim)
         {
@@ -262,6 +263,7 @@ public class heromove : MonoBehaviour
             sword.transform.SetParent(slot1on.transform, false);            
         }
     }
+   
 
     void animend (string param) // тестовый метод для отслеживания окончания анимации
     {
@@ -273,7 +275,7 @@ public class heromove : MonoBehaviour
         }
 
     }
-
+ 
     void ReadInput() //метод чтения ввода с устройства
     {
         h = CrossPlatformInputManager.GetAxis("Horizontal");
