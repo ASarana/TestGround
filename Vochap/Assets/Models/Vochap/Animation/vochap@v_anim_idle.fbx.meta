@@ -62,6 +62,12 @@ ModelImporter:
     100108: //RootNode
     100110: vochapDT
     100112: vochapMR
+    100114: SLOT_1
+    100116: SLOT_1_end
+    100118: SLOT_2
+    100120: SLOT_2_end
+    100122: SLOT_3
+    100124: SLOT_3_end
     400000: chest
     400002: f_index.01.L
     400004: f_index.01.R
@@ -119,6 +125,12 @@ ModelImporter:
     400108: //RootNode
     400110: vochapDT
     400112: vochapMR
+    400114: SLOT_1
+    400116: SLOT_1_end
+    400118: SLOT_2
+    400120: SLOT_2_end
+    400122: SLOT_3
+    400124: SLOT_3_end
     4300000: vochapDT
     7400000: v_anim_idle
     9500000: //RootNode
