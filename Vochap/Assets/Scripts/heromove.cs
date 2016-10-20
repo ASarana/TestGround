@@ -219,8 +219,18 @@ public class heromove : MonoBehaviour
             anima.SetBool("fall", false);
             anima.SetBool("jumpdown", true);
         }
-    }
 
+		if (Input.GetKeyDown ("f") )
+			{
+				anima.SetBool("getsword", true);
+			} 
+
+		if (Input.GetKeyDown ("g") )
+		{
+			anima.SetBool("getsword", false);
+		} 
+    }
+		
     void ApplyExtraTurnRotation()
     {
         if (move.magnitude > 1f) move.Normalize();
@@ -235,17 +245,17 @@ public class heromove : MonoBehaviour
 
     void swichwep(string param) // тестовый метод для анимирования смены оружия и самой смены
     {
-		if (param == "change" && getswordanim) {
-		//if (sword.transform.parent == slot1on.transform)
-         //  {
-          //     sword.transform.SetParent(slot1off.transform, false);
-          //      return;
-          //  }
-		//if (sword.transform.parent != slot1on.transform)
-       //     {
+		/*if (param == "change" && getswordanim) {
+		if (sword.transform.parent == slot1on.transform)
+          {
+               sword.transform.SetParent(slot1off.transform, false);
+                return;
+            }
+		if (sword.transform.parent != slot1on.transform)
+           {
                 anima.SetBool("getsword", true);              
-           //     return;
-           // }
+                return;
+           }
         }
         if(param == "hide" && getswordanim)
         {
@@ -257,7 +267,7 @@ public class heromove : MonoBehaviour
         {
             getswordanim = false;
             sword.transform.SetParent(slot1on.transform, false);            
-        }
+        }*/
     }
     void animend (string param) // тестовый метод для отслеживания окончания анимации
     {
@@ -269,6 +279,8 @@ public class heromove : MonoBehaviour
         }
 
     }
+
+
 
     void ReadInput() //метод чтения ввода с устройства
     {
